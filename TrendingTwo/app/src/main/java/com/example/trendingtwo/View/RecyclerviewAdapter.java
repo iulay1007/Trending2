@@ -1,21 +1,40 @@
 package com.example.trendingtwo.View;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.trendingtwo.Model.JsonBean;
 import com.example.trendingtwo.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-public class RecyclerviewAdaper  extends RecyclerView.Adapter<RecyclerviewAdaper.VH>{
+import java.util.ArrayList;
+import java.util.List;
+
+public class RecyclerviewAdapter  extends RecyclerView.Adapter<RecyclerviewAdapter.VH>{
     public Context context;
     private ItemClickListener mItemClickListener ;
+    private List<JsonBean> mJsonBeanList=new ArrayList<>();
+
+
+   public void setData(List<JsonBean> list) {
+   mJsonBeanList.clear();
+   mJsonBeanList=list;
+
+      notifyDataSetChanged();
+
+  }
+
     public interface ItemClickListener{
-        public void onItemClick(int position,RecyclerviewAdaper.VH holder) ;
+        public void onItemClick(int position,RecyclerviewAdapter.VH holder) ;
     }
     public void setOnItemClickListener(ItemClickListener itemClickListener){
         this.mItemClickListener = itemClickListener ;
@@ -23,23 +42,52 @@ public class RecyclerviewAdaper  extends RecyclerView.Adapter<RecyclerviewAdaper
     }
 
 
-    public RecyclerviewAdaper(Context context){
+    public RecyclerviewAdapter(Context context){
         this.context = context;
-
 
     }
 
     @NonNull
     @Override
-    public RecyclerviewAdaper.VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerviewAdapter.VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view=View.inflate(context, R.layout.item_layout,null);
 
         return new VH(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerviewAdaper.VH holder, final int position) {
+    public void onBindViewHolder(@NonNull final RecyclerviewAdapter.VH holder, final int position) {
 
+
+
+
+       holder.author.setText(mJsonBeanList.get(position).getAuthor());
+       holder.name.setText(mJsonBeanList.get(position).getName());
+       holder.description.setText(mJsonBeanList.get(position).getDescription());
+       holder.language.setText(mJsonBeanList.get(position).getLanguage());
+      holder.image.setImageURI(mJsonBeanList.get(position).getAvatar());
+      holder.num_one.setText(String.valueOf(mJsonBeanList.get(position).getStars()));
+      holder.num_two.setText(String.valueOf(mJsonBeanList.get(position).getForks()));
+        try {
+            if(mJsonBeanList.get(position).getLanguage()==null==false){
+
+
+
+
+                holder.cir.setBackground(holder.drawable);
+                holder.cir.setVisibility(ImageView.VISIBLE);
+                holder.drawable.setColor(Color.parseColor(mJsonBeanList.get(position).getLanguageColor()));
+
+
+            }
+            else  {
+
+                holder.cir.setVisibility(ImageView.GONE);
+
+            }
+
+        }catch (Exception e){}
 
         holder.description.setVisibility(TextView.GONE);
         holder.language.setVisibility(TextView.GONE);
@@ -68,6 +116,9 @@ public class RecyclerviewAdaper  extends RecyclerView.Adapter<RecyclerviewAdaper
     @Override
     public int getItemCount() {
         //!!!!!!!!!!!!!
+     if(mJsonBeanList==null==false)
+       return mJsonBeanList.size();
+     else
         return 15;
     }
 
@@ -87,6 +138,9 @@ public class RecyclerviewAdaper  extends RecyclerView.Adapter<RecyclerviewAdaper
         ImageView cir;
         ImageView star;
         ImageView fork;
+        GradientDrawable drawable;
+
+        SimpleDraweeView image;
         public VH(@NonNull View itemView) {
             super(itemView);
 //gravity解决
@@ -102,6 +156,8 @@ public class RecyclerviewAdaper  extends RecyclerView.Adapter<RecyclerviewAdaper
             cir=(ImageView)itemView.findViewById(R.id.cir);
             star=(ImageView)itemView.findViewById(R.id.star);
             fork=(ImageView)itemView.findViewById(R.id.fork);
+            image=(SimpleDraweeView)itemView.findViewById(R.id.avatur);
+            drawable=(GradientDrawable) itemView.getResources().getDrawable(R.drawable.circle_three);
 
         }
     }

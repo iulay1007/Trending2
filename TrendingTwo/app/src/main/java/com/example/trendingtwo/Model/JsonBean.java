@@ -2,21 +2,22 @@ package com.example.trendingtwo.Model;
 
 import java.util.List;
 
-public class DataBean {  /**
- * author : VGraupera
- * name : 1on1-questions
- * avatar : https://github.com/VGraupera.png
- * url : https://github.com/VGraupera/1on1-questions
- * description : Mega list of 1 on 1 meeting questions compiled from a variety to sources
- * language : JavaScript
- * languageColor : #f1e05a
- * stars : 4243
- * forks : 264
- * currentPeriodStars : 2231
- * builtBy : [{"username":"VGraupera","href":"https://github.com/VGraupera","avatar":"https://avatars1.githubusercontent.com/u/10377"},{"username":"aallbrig","href":"https://github.com/aallbrig","avatar":"https://avatars2.githubusercontent.com/u/3106250"},{"username":"gergelyke","href":"https://github.com/gergelyke","avatar":"https://avatars3.githubusercontent.com/u/2174968"}]
- */
+public class JsonBean {
+    /**
+     * author : corona-warn-app
+     * name : cwa-server
+     * avatar : https://github.com/corona-warn-app.png
+     * url : https://github.com/corona-warn-app/cwa-server
+     * description : Backend implementation for the Apple/Google exposure notification API.
+     * language : Java
+     * languageColor : #b07219
+     * stars : 370
+     * forks : 33
+     * currentPeriodStars : 226
+     * builtBy : [{"username":"michael-burwig","href":"https://github.com/michael-burwig","avatar":"https://avatars1.githubusercontent.com/u/64439292"},{"username":"pithumke","href":"https://github.com/pithumke","avatar":"https://avatars0.githubusercontent.com/u/8984460"},{"username":"johanneseschrig","href":"https://github.com/johanneseschrig","avatar":"https://avatars0.githubusercontent.com/u/6208191"},{"username":"ole-lilienthal","href":"https://github.com/ole-lilienthal","avatar":"https://avatars0.githubusercontent.com/u/1227839"},{"username":"christian-kirschnick","href":"https://github.com/christian-kirschnick","avatar":"https://avatars1.githubusercontent.com/u/64424068"}]
+     */
 
-private String author;
+    private String author;
     private String name;
     private String avatar;
     private String url;
@@ -27,6 +28,7 @@ private String author;
     private int forks;
     private int currentPeriodStars;
     private List<BuiltByBean> builtBy;
+
 
     public String getAuthor() {
         return author;
@@ -108,6 +110,7 @@ private String author;
         this.currentPeriodStars = currentPeriodStars;
     }
 
+
     public List<BuiltByBean> getBuiltBy() {
         return builtBy;
     }
@@ -118,9 +121,9 @@ private String author;
 
     public static class BuiltByBean {
         /**
-         * username : VGraupera
-         * href : https://github.com/VGraupera
-         * avatar : https://avatars1.githubusercontent.com/u/10377
+         * username : michael-burwig
+         * href : https://github.com/michael-burwig
+         * avatar : https://avatars1.githubusercontent.com/u/64439292
          */
 
         private String username;
@@ -151,5 +154,4 @@ private String author;
             this.avatar = avatar;
         }
     }
-
 }
